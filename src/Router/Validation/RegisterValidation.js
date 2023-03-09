@@ -1,34 +1,36 @@
 const jwt = require("jsonwebtoken");
-const env = require("dotenv");
+const UserToken = require("../../module/Token")
 
-env.config();
+
+
 
 const Tokenverify = async (req, res, next) => {
   if (req.headers.authorization) {
     const token = req.headers.authorization;
     console.log(token)
-    console.log("Verify token");
-    if (token) {
+    const Result = await UserToken.find({RefreshToken:token})
+    if (Result[0]?.RefreshToken){
       jwt.verify(token, "abcdefghijklmnopqrstuvwxyz", function (err, decoded) {
         if (err) {
+          console.log(err)
           return res.status(403).json({
             status: "failed",
             message: "Invalid token",
           });
         }
+        console.log("insideverifytoken")
         next();
       });
     } else {
       return res.status(403).json({
         status: "failed",
-        message: "Invalid token",
+        message: "Please loggin",
       });
     }
-  } else {
-    return res
-      .status(403)
-      .json({ status: "Failed", message: "Not authenticated user" });
-  }
+    }
+    else {
+    return res.status(403).json({ status: "Failed", message: "Not authenticated user" });
+    }
 };
 
 module.exports = {Tokenverify}; 
