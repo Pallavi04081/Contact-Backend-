@@ -29,6 +29,14 @@ const userRegisationDetails = mongoose.Schema({
     DateOFBirth:{
         type:String,
         reuqired:true
+    },
+    password:{
+        type:String,
+        required:true
+    },
+    VerifiedEmail:{
+        type:Number,
+        default:0
     }
 })
 
