@@ -50,7 +50,7 @@ async function SendEmail(Result) {
         from: 'nirmalpallavi0408@gmail.com', 
         to: Result.Email, 
         subject:"For verification mail",
-        html: `<p>Hi ${Result.FirstName} Please click here <a href=http://localhost:5000/verifyEmail?id=${Result._id}>Verify</a> to verify your Eamil Address</p>`, 
+        html: `<p>Hi ${Result.FirstName} Please click here <a href=https://contact-backend-ukxi.onrender.com/verifyEmail?id=${Result._id}>Verify</a> to verify your Eamil Address</p>`, 
       });
     
       console.log("Message sent: %s", info.messageId);
